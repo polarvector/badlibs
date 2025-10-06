@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insane Encounters</title>
+
+    <!-- Make it responsive on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+
+    <!-- Your CSS (after Bootstrap so your overrides win) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+
+  <body class="bg-black text-white">
+    <div class="container-fluid py-5">
+      <div class="row justify-content-center">
+        <!-- Responsive centered column: full on mobile, narrower on larger screens -->
+        <div class="col-12 col-md-10 col-lg-9 col-xl-8">
+
+          <!-- Intro: fully centered -->
+            <header class="text-center mb-4">
+            <h1 class="display-5 fw-bold text-warning mb-2">Insane Encounters!</h1>
+
+            <p class="intro-line">
+                Everyday at <strong>UTC +00:00</strong>.
+            </p>
+            <br>
+            <p class="intro-line">
+                Submit & vote encounters <strong>insane, mid</strong> or <strong>shit!</strong>
+            </p>
+
+            <p class="intro-line">
+                <strong><a href="">Top #3</a> get handsomely rewarded...</strong>.
+            </p>
+            </header>
+
+
+          <!-- Story area -->
+            <!-- Main story (full-width on large screens) -->
+            <main class="madlib-style px-lg-5">
+            <form action="/" method="post" class="fs-5 lh-lg">
+                {% if response %}
+                <div class="alert alert-light text-center fw-bold">{{ response }}</div>
+                {% endif %}
+
+                <!-- Full-width story area -->
+                <div class="story-text container-fluid px-0">
+                {{ text|safe }}
+                </div>
+
+                {% if not response %}
+                <div class="mt-4 text-center">
+                    <button
+                    class="btn btn-lol px-5 py-2 fw-bold"
+                    type="submit"
+                    onclick="this.disabled=true; this.innerText='🤯 Submitted!'; this.form.submit();">
+                    🤯 Hand it in!
+                    </button>
+                </div>
+                {% endif %}
+            </form>
+            </main>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS bundle (optional, for components) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

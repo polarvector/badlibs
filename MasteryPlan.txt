@@ -1,0 +1,40 @@
+Version control discipline
+    - Create a branch workflow before starting major challenges (main, dev, feature/ui-rework, etc.)
+    - Each “Challenge” should live on its own branch and merge only when complete
+
+HTML/CSS
+    - Mod index.html into layout.html to use on multiple pages through inheritance
+    - Implement current homepage in index.html
+    - Buy a domain. Options insanity.ai, insanencounters.ai, insane.encounters
+    - Launch to live web through GitHub Pages + Vercel
+    - Implement the About and Privacy Policy page after launch
+    - Add leaderboards and give users the ability to vote insane, mid or shit
+	
+    Challenges:
+	- Remove current HTMLs and implement a prettier layout. HTML/CSS only. [Ref. CS50W L1]
+	- Implement smooth scroll animations using JS and make superior UI with React. [Ref. CS50W L5, L6]
+
+Flask App
+    - Implement insane, mid, shit rating system
+    - Write date, user submission and AI rating to DB
+    - Implement daily update logic
+	
+    Challenges:
+	- Implement admin panel. Provide XSS & CSRF. [Ref. CS50W L8]
+	- Store cookie/session ID for each user’s rating history for analytics & abuse-protection
+	- Write unit tests, then automate with Selenium. [Ref. CS50W L7]
+	- Make backend scalable with Docker.  [Ref. CS50W L7]
+	- Add CI/CD capability. [Ref. CS50W L7]
+	- Add logging to Flask (write errors + actions to a file)
+	- Lastly, migrate everything to Django. [Ref. CS50W L3]
+	- Hook in Sentry or a simple log viewer
+
+SQLite Database
+    -Create insanity.db and define schema. id, date, submission, rating
+    -Only Read & Update instructions available through Flask out of CRUD
+    -Segregate Create & Delete capabilities to a separate admin portal
+    -Create guardrails against XSS (Cross-Site Scripting) and CSRF (Cross-Site Request Forgery)
+
+    Challenges:
+	- Implement segmentation & pruning routine. [Ref. ChatGPT]
+	- Implement Models & Migration system from scratch. [Ref. CS50W L4]
