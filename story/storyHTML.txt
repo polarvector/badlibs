@@ -1,15 +1,15 @@
-<strong>LV Casino - 1 a.m.</strong>
+<strong>Caesar's Palace - 1 AM</strong>
 
-Pope: Bless this <input name="filler0" type="text" placeholder="thing" maxlength="60">, it's a miracle!  
-Putin: I prefer my miracles with a side of <input name="filler1" type="text" placeholder="stuff" maxlength="60">.  
-Xi: This <input name="filler2" type="text" placeholder="thing" maxlength="60"> is made in China. High quality.  
-Trump: Fake news! I built the best <input name="filler3" type="text" placeholder="place" maxlength="60"> for miracles. Bigly!  
+Dirty Pope: Blessings! Or, as they call it here, <input name="filler0" type="text" placeholder="thing" maxlength="60">!  
+Putin: I bring the <input name="filler1" type="text" placeholder="vibe" maxlength="60"> of <input name="filler2" type="text" placeholder="place" maxlength="60">.  
+Xi: Impressive, but can it <input name="filler3" type="text" placeholder="action" maxlength="60">?  
+Trump: Huge! Tremendous! Better than <input name="filler4" type="text" placeholder="character" maxlength="60">.  
+Kanye: I am the <input name="filler5" type="text" placeholder="power" maxlength="60"> of all <input name="filler6" type="text" placeholder="name" maxlength="60">.  
 
-Kanye: I’m here to perform an exorcism on this <input name="filler4" type="text" placeholder="thing" maxlength="60">.  
-Slot Machine: JACKPOT! <input name="filler5" type="text" placeholder="sound" maxlength="60">!
+Roulette Wheel: Why am I spinning in <input name="filler7" type="text" placeholder="time" maxlength="60">?  
 
-Pope: That’s a sign. We should all play [GAME].  
-Trump: I already won <input name="filler6" type="text" placeholder="quantity" maxlength="60"> times. Tremendous, believe me.  
+Dirty Pope: Because the <input name="filler8" type="text" placeholder="stuff" maxlength="60"> commands it.  
+Xi: <input name="filler9" type="text" placeholder="speech" maxlength="60">! I must consult my <input name="filler10" type="text" placeholder="relation" maxlength="60">.  
+Putin: In Soviet <input name="filler11" type="text" placeholder="place" maxlength="60">, <input name="filler12" type="text" placeholder="sound" maxlength="60"> listens to you.  
 
-Kanye: Who’s up for a <input name="filler7" type="text" placeholder="event" maxlength="60">? This <input name="filler8" type="text" placeholder="thing" maxlength="60"> insists.  
-Table: I don’t consent but I’ll allow it.
+Statue of Caesar: Can someone order me a <input name="filler13" type="text" placeholder="thing" maxlength="60">?

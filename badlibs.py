@@ -19,7 +19,8 @@ def sceneSetup(characters, setting):
 
     Insert 4–6 blanks for users to fill (Mad Libs style), labeled clearly with ALL CAPS placeholders.
     Strictly, only these 16 libs are allowed: CHARACTER, THING, PLACE, STUFF, ACTION, SPEECH, VIBE, SOUND, POWER, TIME, REF, QUANTITY, NAME, EVENT, RELATION, SPOT
-
+    NEVER use the plural form of these libs. I said 16 STRICTLY. That means under no condition there's gonna be any more.
+    
     RULES:
     - Set up the location and time in one-line.
     - Jump straight into the funny part — no setup paragraph.
@@ -27,8 +28,8 @@ def sceneSetup(characters, setting):
     - Keep it under 8–10 lines total.
     - No moral or explanation; just pure absurd humor.
     - Output only the dialogue script (no intro text).
+    - DO NOT have two newlines respectively between every single line. Only one newline tag per line. Exception is the rule below.
     - Have at least one paragraph separation in the entire joke selected for maximum humor impact.
-    - Don't have two newlines in a row between every single line.
 
     EXAMPLE:
     **LA Hooters – Midnight**
@@ -62,40 +63,55 @@ def prepareHTML():
         text = f.read()
 
     # Define libs and construct pattern safely
-    libs = ["character", "thing", "place", "stuff", "action", "speech", "vibe",
-            "sound", "power", "time", "ref", "quantity", "name", "event",
-            "relation", "spot"]
+    libs = [
+        "character", "characters",
+        "thing", "things",
+        "place", "places",
+        "stuff", "stuffs",
+        "action", "actions",
+        "speech", "speeches",
+        "vibe", "vibes",
+        "sound", "sounds",
+        "power", "powers",
+        "time", "times",
+        "ref", "refs",
+        "quantity", "quantities",
+        "name", "names",
+        "event", "events",
+        "relation", "relations",
+        "spot", "spots"
+    ]
 
-    # Match placeholders like [CHARACTER], [THING], etc.
-    pattern = r"\[(" + "|".join(lib.upper() for lib in libs) + r")\]"
-
+    # Pattern that matches exact placeholders like [THING] or [THINGS] — no partial overlap.
+    alts = sorted({lib.upper() for lib in libs}, key=len, reverse=True)
+    pattern = r"\[(" + "|".join(re.escape(w) for w in alts) + r")\]"
+    
     new = ""
     last = 0
     iter = 0
     fillers = []
 
-    # Iterate through each match
     for match in re.finditer(pattern, text):
         start, end = match.span()
-        placeholder = match.group(1).lower()   # convert matched placeholder to lowercase (without brackets)
+        placeholder = match.group(1).lower()   # inner text without brackets
         fillers.append(placeholder)
 
-        # Append the text before match and then the input tag
         new += text[last:start]
         new += f'<input name="filler{iter}" type="text" placeholder="{placeholder}" maxlength="60">'
         last = end
         iter += 1
 
-    # Append any remaining text
     new += text[last:]
     new = strongTitle(new)
     with open(story+'storyHTML.txt', 'w', encoding='utf-8') as f:
         f.write(new)
 
 def quality(response):
+    response = response.lower()
     if 'insane' in response: return  1
-    if 'mid'    in response: return  0
-    if 'shit'   in response: return -1
+    elif 'mid'    in response: return  0
+    elif 'shit'   in response: return -1
+    else: return 0
 
 class Database():
     def __init__(self, path="insanity.db"):
