@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 import re, os, sqlite3
 
 app = Flask(__name__)
+db = Database("insanity.db")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
