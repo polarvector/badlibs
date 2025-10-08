@@ -125,7 +125,7 @@ def today():
     dt = datetime.now(utc)
     return dt.year*10000 + dt.month*100 + dt.day
 
-def date_exists(date):
+def date_exists(date, db):
     exists = db.execute("SELECT * FROM analytics WHERE date = ?", date)
     return bool(exists)
 

@@ -1,7 +1,7 @@
 from badlibs import today, quality, getSkit, date_exists, scene_setup, prepare_html, Database
 from openai import OpenAI
 from flask import Flask, render_template, request
-import re, os
+import re, os, sqlite3
 
 storydir = "story/"
 app = Flask(__name__)
@@ -11,7 +11,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_pedagogyOS"))
 @app.route("/", methods=["GET", "POST"])
 def index():
     date = today()
-    if not date_exists(date):
+    if not date_exists(date, db):
         scene_setup('Dirty Pope, Putin, Xi, Trump and Kanye','Caesar\'s Palace - 1 AM')
         prepare_html()
     text, orig = getSkit(storydir)
@@ -55,7 +55,7 @@ def index():
                     Insane, Mid, Shit. Your response should only be a single word out of these.
                     Be really critical. Don't just give away an insane score to a mid-joke, or you'll be a joke.
                     Dry humour gets a direct "shit". Do not acknowledge me or say anything unnecessary.
-                    Just respond with one of these words.
+                    Just judge critically and respond with one of these words.
                     """
         )
         resp = resp.output_text.lower().strip()
