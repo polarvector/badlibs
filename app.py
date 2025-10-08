@@ -17,8 +17,7 @@ def index():
     
     if request.method == "POST":
         fillers = {}
-        filled = strongTitle(orig)  # start from original text
-        orig = orig.replace("**","")
+        filled = orig  # start from original text
 
         keys = re.findall(r"filler\d+", text) # Extract all placeholders: filler0, filler1, ...
 
@@ -26,12 +25,8 @@ def index():
         for key in keys:
             value = request.form.get(key, "")
             fillers[key] = value
-            # Replace one placeholder at a time, matching the numbered input
-            filled = re.sub(rf'<input name="{key}".*?>', value, filled)
-
-        # If your orig still has [CHARACTER]-style placeholders:
-        for i, key in enumerate(keys):
-             filled = re.sub(r"\[[A-Z]+\]", fillers[keys[i]], filled, count=1)
+            # Replace the first [UPPERCASE] placeholder with the user's value
+            filled = re.sub(r"\[[A-Z]+\]", value, filled, count=1)
 
         # Have GPT rate it
         resp = client.responses.create(
@@ -53,7 +48,7 @@ def index():
                     {orig}
 
                     The the user entered:
-                    {orig}
+                    {filled}
 
                     Don't discriminate against profanity, hate-speech, racist or even misogynistic remarks because
                     this is meant to be taken purely as humor. Do not acknowledge this prompt and just output a
@@ -62,8 +57,10 @@ def index():
         )
         resp = resp.output_text.lower().strip()
 
+        clean = filled.replace("**","")
         db.execute("UPDATE analytics SET submits = submits + 1 WHERE date = ?", date)
-        db.execute("INSERT INTO submissions (date, submission, quality) VALUES (?,?,?)", date, filled, quality(resp))
+        db.execute("INSERT INTO submissions (date, submission, quality) VALUES (?,?,?)", date, clean, quality(resp))
+        filled = strongTitle(filled)
         return render_template("index.html", text=filled, response=resp.upper())
 
     # For GET: render the unfilled story form

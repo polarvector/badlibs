@@ -18,7 +18,7 @@ def sceneSetup(characters, setting):
     Add very brief stage directions if they enhance the chaos.
 
     Insert 4–6 blanks for users to fill (Mad Libs style), labeled clearly with ALL CAPS placeholders.
-    Only these 16 general libs are allowed: CHARACTER, THING, PLACE, STUFF, ACTION, SPEECH, VIBE, SOUND, POWER, TIME, REF, QUANTITY, NAME, EVENT, RELATION, SPOT
+    Strictly, only these 16 libs are allowed: CHARACTER, THING, PLACE, STUFF, ACTION, SPEECH, VIBE, SOUND, POWER, TIME, REF, QUANTITY, NAME, EVENT, RELATION, SPOT
 
     RULES:
     - Set up the location and time in one-line.
