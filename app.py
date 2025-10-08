@@ -4,11 +4,12 @@ from flask import Flask, render_template, request
 import re, os, sqlite3
 
 app = Flask(__name__)
-db = Database("insanity.db")
-client = OpenAI(api_key=os.getenv("badKEY"))
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    db = Database("insanity.db")
+    client = OpenAI(api_key=os.getenv("badKEY"))
     date = today()
     if not date_exists(date, db):
         sceneSetup('Dirty Pope, Putin, Xi, Trump and Kanye','Caesar\'s Palace - 1 AM')
