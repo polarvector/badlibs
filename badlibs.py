@@ -2,6 +2,7 @@ import re, os, sqlite3
 from openai import OpenAI
 from datetime import datetime, timezone
 
+os.makedirs("story", exist_ok=True)
 client = OpenAI(api_key=os.getenv("badKEY"))
 utc = timezone.utc
 story = "story/"
