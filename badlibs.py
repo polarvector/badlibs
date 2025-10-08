@@ -1,7 +1,9 @@
 import re, os, sqlite3
 from openai import OpenAI
+from datetime import datetime, timezone
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_pedagogyOS"))
+utc = timezone.utc
 
 def scene_setup(characters, setting):
     prompt = f"""
@@ -111,6 +113,21 @@ class Database():
             conn.commit()
             conn.close()
             return None
+
+def getSkit(story):
+    with open(story+'story.txt','r',encoding="utf-8") as f:
+        orig = f.read()
+    with open(story+'storyHTML.txt','r',encoding="utf-8") as f:
+        text = f.read()
+    return text, orig
+
+def today():
+    dt = datetime.now(utc)
+    return dt.year*10000 + dt.month*100 + dt.day
+
+def date_exists(date):
+    exists = db.execute("SELECT * FROM analytics WHERE date = ?", date)
+    return bool(exists)
 
 def main():
     scene_setup('Pope, Putin, Xi, Trump and Kanye','LA Strip Club at 3 AM')
