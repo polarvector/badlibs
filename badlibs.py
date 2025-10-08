@@ -9,7 +9,7 @@ story = "story/"
 def sceneSetup(characters, setting):
     client = OpenAI(api_key=os.getenv("badKEY"))
     prompt = f"""
-    You are generating a short, absurdly funny script, which is part of a series called “Insane Encounters” 
+    You are generating a short, absurdly funny script, which is part of a series called “Insane Encounters”. 
     Each day, users vote for 4–5 characters, and the winning ones appear in this scene.
 
     TASK:
@@ -19,11 +19,11 @@ def sceneSetup(characters, setting):
     Add very brief stage directions if they enhance the chaos.
 
     Insert 4–6 blanks for users to fill (Mad Libs style), labeled clearly with ALL CAPS placeholders.
-    Strictly, only these 16 libs are allowed: CHARACTER, THING, PLACE, STUFF, ACTION, SPEECH, VIBE, SOUND, POWER, TIME, REF, QUANTITY, NAME, EVENT, RELATION, SPOT
+    Strictly, only these 16 libs are allowed: CHARACTER, THING, PLACE, STUFF, ACTION, SPEECH, VIBE, SOUND, POWER, TIME, REF, QUANTITY, NAME, EVENT, RELATION, SPOT.
     NEVER use the plural form of these libs. I said 16 STRICTLY. That means under no condition there's gonna be any more.
-    
+
     RULES:
-    - Set up the location and time in one-line.
+    - Set up the location and time in one line.
     - Jump straight into the funny part — no setup paragraph.
     - End with a punchline or unexpected comment from either one of the main characters or inanimate object or side characters in the scene.
     - Keep it under 8–10 lines total.
@@ -42,22 +42,24 @@ def sceneSetup(characters, setting):
     Kanye: Who ordered the [STUFF]?  
     Waitress: Sir, that’s ranch.  
     Kanye: Not anymore.  
-    Chair: I’m leaving this timeline.
+    Chair: I’m leaving this timeline.  
     Landa(sipping beer): Ja, smart chair.
 
-    TODAY's SETUP:
+    TODAY'S SETUP:
     Characters: {characters}
     Location & Time: {setting}
     """
 
-    resp = client.responses.create(
+    resp = client.chat.completions.create(
         model="gpt-4o",
         temperature=0.7,
-        input=prompt,
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
     )
 
-    with open(story+'story.txt','w',encoding='UTF-8') as f:
-        f.write(resp.output_text)
+    with open(story + 'story.txt', 'w', encoding='utf-8') as f:
+        f.write(resp.choices[0].message.content)
         
 def prepareHTML():
     with open(story+'story.txt', 'r', encoding='utf-8') as f:
