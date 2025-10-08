@@ -3,11 +3,11 @@ from openai import OpenAI
 from datetime import datetime, timezone
 
 os.makedirs("story", exist_ok=True)
-client = OpenAI(api_key=os.getenv("badKEY"))
 utc = timezone.utc
 story = "story/"
 
 def sceneSetup(characters, setting):
+    client = OpenAI(api_key=os.getenv("badKEY"))
     prompt = f"""
     You are generating a short, absurdly funny script, which is part of a series called “Insane Encounters” 
     Each day, users vote for 4–5 characters, and the winning ones appear in this scene.
