@@ -5,7 +5,7 @@ import re, os, sqlite3
 
 app = Flask(__name__)
 db = Database("insanity.db")
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_pedagogyOS"))
+client = OpenAI(api_key=os.getenv("API_KEY_badlibs"))
 
 @app.route("/", methods=["GET", "POST"])
 def index():

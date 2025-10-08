@@ -2,7 +2,7 @@ import re, os, sqlite3
 from openai import OpenAI
 from datetime import datetime, timezone
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_pedagogyOS"))
+client = OpenAI(api_key=os.getenv("API_KEY_badlibs"))
 utc = timezone.utc
 story = "story/"
 
