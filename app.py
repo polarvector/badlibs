@@ -20,7 +20,6 @@ def index():
         filled = strongTitle(orig)  # start from original text
         orig = orig.replace("**","")
 
-
         keys = re.findall(r"filler\d+", text) # Extract all placeholders: filler0, filler1, ...
 
         # Loop over all input keys and replace placeholders
