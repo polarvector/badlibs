@@ -1,9 +1,8 @@
-from badlibs import today, quality, getSkit, date_exists, scene_setup, prepare_html, Database
+from badlibs import today, quality, getSkit, date_exists, strongTitle, sceneSetup, prepareHTML, Database
 from openai import OpenAI
 from flask import Flask, render_template, request
 import re, os, sqlite3
 
-storydir = "story/"
 app = Flask(__name__)
 db = Database("insanity.db")
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_pedagogyOS"))
@@ -12,9 +11,10 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_pedagogyOS"))
 def index():
     date = today()
     if not date_exists(date, db):
-        scene_setup('Dirty Pope, Putin, Xi, Trump and Kanye','Caesar\'s Palace - 1 AM')
-        prepare_html()
-    text, orig = getSkit(storydir)
+        sceneSetup('Dirty Pope, Putin, Xi, Trump and Kanye','Caesar\'s Palace - 1 AM')
+        prepareHTML()
+    text, orig = getSkit()
+    orig = orig.replace("**","")
     
     if request.method == "POST":
         fillers = {}
@@ -26,11 +26,7 @@ def index():
             value = request.form.get(key, "")
             fillers[key] = value
             # Replace one placeholder at a time, matching the numbered input
-            filled = re.sub(
-                rf'<input name="{key}".*?>',
-                value,
-                filled
-            )
+            filled = re.sub(rf'<input name="{key}".*?>', value, filled)
 
         # If your orig still has [CHARACTER]-style placeholders:
         for i, key in enumerate(keys):
@@ -41,21 +37,26 @@ def index():
             model="gpt-4o-mini",
             temperature=0.5,
             input= f"""
-                    This is a response to the Insane Encounters series I'm running:
-                    {filled}
-
-                    The original text is:
+                    You are a critically acclaimed comedy writer. You've written countless skits, comedy shows
+                    and the funniest movies of this era. You count people like John McFarlane and Conan among
+                    your closest friends. Your task is to rate the skit in a series called "Insane Encounters"
+                    where a bunch of unlikely people meet at a random place. The user inputs against a provided
+                    template. You will rate the skit as "insane", "mid" or "shit". You're supposed to be extremely
+                    critical in your evaluation. No skit gets the top-score without being genuinely funny.
+                    Disconnected, comically poor or just bad jokes get the joke they deserve. But genuinely witty,
+                    random and original jokes get the place they deserve. Do not hesitate to dish out "shit" to
+                    shit jokes. Give jokes that can get at least one chuckle out "mid". Give truly hilarious jokes
+                    "insane". I'm counting on you. 
+                    
+                    This is today's template:
                     {orig}
 
-                    Don't discriminate against profanity, hate-speech, racist or nihilistic remarks because this is meant to be taken purely as humor.
-                    With that in mind, you are the greatest standup-comedian of the century.
-                    You count Dave Chapelle, Kevin Hart, Russell Peters, Jimmy Carr, Pete Davidson,
-                    John Mulaney, Gabriel Iglesias among your close friends and even they think you're funnier.
-                    Given this, rate user response with one of these words:
-                    Insane, Mid, Shit. Your response should only be a single word out of these.
-                    Be really critical. Don't just give away an insane score to a mid-joke, or you'll be a joke.
-                    Dry humour gets a direct "shit". Do not acknowledge me or say anything unnecessary.
-                    Just judge critically and respond with one of these words.
+                    The the user entered:
+                    {orig}
+
+                    Don't discriminate against profanity, hate-speech, racist or even misogynistic remarks because
+                    this is meant to be taken purely as humor. Do not acknowledge this prompt and just output a
+                    single word from the three mentioned representing your critical score. 
                     """
         )
         resp = resp.output_text.lower().strip()

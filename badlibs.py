@@ -6,7 +6,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_pedagogyOS"))
 utc = timezone.utc
 story = "story/"
 
-def scene_setup(characters, setting):
+def sceneSetup(characters, setting):
     prompt = f"""
     You are generating a short, absurdly funny script, which is part of a series called “Insane Encounters” 
     Each day, users vote for 4–5 characters, and the winning ones appear in this scene.
@@ -27,10 +27,11 @@ def scene_setup(characters, setting):
     - Keep it under 8–10 lines total.
     - No moral or explanation; just pure absurd humor.
     - Output only the dialogue script (no intro text).
-    - Have at least one paragraph separation for readability and maximum humor impact.
+    - Have at least one paragraph separation in the entire joke selected for maximum humor impact.
+    - Don't have two newlines in a row between every single line.
 
     EXAMPLE:
-    LA HOOTERS – MIDNIGHT
+    **LA Hooters – Midnight**
 
     Trump: Best [THING]. Everyone says so. Tremendous [THING].  
     Elon: They’d be better if they self-[ACTION].  
@@ -55,8 +56,8 @@ def scene_setup(characters, setting):
 
     with open(story+'story.txt','w',encoding='UTF-8') as f:
         f.write(resp.output_text)
-
-def prepare_html():
+        
+def prepareHTML():
     with open(story+'story.txt', 'r', encoding='utf-8') as f:
         text = f.read()
 
@@ -87,8 +88,8 @@ def prepare_html():
 
     # Append any remaining text
     new += text[last:]
-
-    with open(story+'story_form_ready.txt', 'w', encoding='utf-8') as f:
+    new = strongTitle(new)
+    with open(story+'storyHTML.txt', 'w', encoding='utf-8') as f:
         f.write(new)
 
 def quality(response):
@@ -115,7 +116,7 @@ class Database():
             conn.close()
             return None
 
-def getSkit(story):
+def getSkit(story="story/"):
     with open(story+'story.txt','r',encoding="utf-8") as f:
         orig = f.read()
     with open(story+'storyHTML.txt','r',encoding="utf-8") as f:
@@ -130,9 +131,15 @@ def date_exists(date, db):
     exists = db.execute("SELECT * FROM analytics WHERE date = ?", date)
     return bool(exists)
 
+def strongTitle(text):
+    lines    = text.split("\n")
+    lines[0] = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", lines[0])
+    text = "\n".join(lines)
+    return text
+
 def main():
-    scene_setup('Pope, Putin, Xi, Trump and Kanye','LA Strip Club at 3 AM')
-    prepare_html()
+    sceneSetup('Pope, Putin, Xi, Trump and Kanye','LV Casino - 1 a.m.')
+    prepareHTML()
 
 if __name__=="__main__":
     main()

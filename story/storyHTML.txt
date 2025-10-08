@@ -1,14 +1,15 @@
-LA STRIP CLUB – 3 AM
+<strong>LV Casino - 1 a.m.</strong>
 
-Pope: I bless this <input name="filler0" type="text" placeholder="thing" maxlength="60">!  
-Putin: I wrestle bears, but this <input name="filler1" type="text" placeholder="thing" maxlength="60"> confuses me.  
-Xi: This <input name="filler2" type="text" placeholder="stuff" maxlength="60"> should be in the <input name="filler3" type="text" placeholder="place" maxlength="60">!  
-Trump: Best <input name="filler4" type="text" placeholder="thing" maxlength="60"> I’ve ever seen, believe me.  
+Pope: Bless this <input name="filler0" type="text" placeholder="thing" maxlength="60">, it's a miracle!  
+Putin: I prefer my miracles with a side of <input name="filler1" type="text" placeholder="stuff" maxlength="60">.  
+Xi: This <input name="filler2" type="text" placeholder="thing" maxlength="60"> is made in China. High quality.  
+Trump: Fake news! I built the best <input name="filler3" type="text" placeholder="place" maxlength="60"> for miracles. Bigly!  
 
-Kanye: I’m here for the <input name="filler5" type="text" placeholder="event" maxlength="60">.  
-Pole (dancing): I’m tired of being objectified!  
-Pope (laughing): <input name="filler6" type="text" placeholder="name" maxlength="60">, even poles have limits.  
-Kanye: <input name="filler7" type="text" placeholder="power" maxlength="60"> activated!
+Kanye: I’m here to perform an exorcism on this <input name="filler4" type="text" placeholder="thing" maxlength="60">.  
+Slot Machine: JACKPOT! <input name="filler5" type="text" placeholder="sound" maxlength="60">!
 
-Xi: Did the <input name="filler8" type="text" placeholder="thing" maxlength="60"> just <input name="filler9" type="text" placeholder="action" maxlength="60">?  
-Putin: In Russia, <input name="filler10" type="text" placeholder="thing" maxlength="60"> <input name="filler11" type="text" placeholder="action" maxlength="60"> you.
+Pope: That’s a sign. We should all play [GAME].  
+Trump: I already won <input name="filler6" type="text" placeholder="quantity" maxlength="60"> times. Tremendous, believe me.  
+
+Kanye: Who’s up for a <input name="filler7" type="text" placeholder="event" maxlength="60">? This <input name="filler8" type="text" placeholder="thing" maxlength="60"> insists.  
+Table: I don’t consent but I’ll allow it.
