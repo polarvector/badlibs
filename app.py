@@ -14,11 +14,13 @@ def index():
         sceneSetup('Dirty Pope, Putin, Xi, Trump and Kanye','Caesar\'s Palace - 1 AM')
         prepareHTML()
     text, orig = getSkit()
-    orig = orig.replace("**","")
     
     if request.method == "POST":
         fillers = {}
-        filled = orig  # start from original text
+        filled = strongTitle(orig)  # start from original text
+        orig = orig.replace("**","")
+
+
         keys = re.findall(r"filler\d+", text) # Extract all placeholders: filler0, filler1, ...
 
         # Loop over all input keys and replace placeholders
