@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_pedagogyOS"))
 utc = timezone.utc
+story = "story/"
 
 def scene_setup(characters, setting):
     prompt = f"""
@@ -52,11 +53,11 @@ def scene_setup(characters, setting):
         input=prompt,
     )
 
-    with open('story.txt','w',encoding='UTF-8') as f:
+    with open(story+'story.txt','w',encoding='UTF-8') as f:
         f.write(resp.output_text)
 
 def prepare_html():
-    with open('story.txt', 'r', encoding='utf-8') as f:
+    with open(story+'story.txt', 'r', encoding='utf-8') as f:
         text = f.read()
 
     # Define libs and construct pattern safely
@@ -87,7 +88,7 @@ def prepare_html():
     # Append any remaining text
     new += text[last:]
 
-    with open('story_form_ready.txt', 'w', encoding='utf-8') as f:
+    with open(story+'story_form_ready.txt', 'w', encoding='utf-8') as f:
         f.write(new)
 
 def quality(response):
